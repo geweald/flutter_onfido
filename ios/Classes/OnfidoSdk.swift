@@ -107,7 +107,7 @@ public func buildOnfidoConfig(config:NSDictionary, appearance: Appearance) throw
       throw NSError(domain: "Invalid or unsupported face variant", code: 0)
     }
   }
-     return onfidoConfig;
+  return onfidoConfig;
 }
 
 @objc(OnfidoSdk)
@@ -142,7 +142,7 @@ class OnfidoSdk: NSObject {
           guard let `self` = self else { return }
           switch response {
             case let .error(error):
-              result(FlutterError(code: "error", message: "Encountered an error: \(error)", details: error))
+              result(FlutterError(code: "error", message: "Encountered an error: \(error)", details: nil))
               return;
             case let .success(results):
               result(createResponse(results, faceVariant: faceVariant))
@@ -159,10 +159,10 @@ class OnfidoSdk: NSObject {
       let onfidoRun = try onfidoFlow.run()
        UIApplication.shared.windows.first?.rootViewController?.present(onfidoRun, animated: true)
     } catch let error as NSError {
-      result(FlutterError(code: "error", message: error.domain, details: error))
+      result(FlutterError(code: "error", message: error.domain, details: nil))
       return;
-    } catch let error {
-      result(FlutterError(code: "error", message: "Error running Onfido SDK", details: error))
+    } catch {
+      result(FlutterError(code: "error", message: "Error running Onfido SDK", details: nil))
       return;
     }
   }
