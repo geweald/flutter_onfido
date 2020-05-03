@@ -34,7 +34,7 @@ OnfidoFlowSteps _$OnfidoFlowStepsFromJson(Map<String, dynamic> json) {
     welcome: json['welcome'] as bool,
     captureDocument: json['captureDocument'] == null
         ? null
-        : CaptureDocumentStep.fromJson(
+        : OnfidoCaptureDocumentStep.fromJson(
             json['captureDocument'] as Map<String, dynamic>),
     captureFace: json['captureFace'] == null
         ? null
@@ -58,16 +58,17 @@ Map<String, dynamic> _$OnfidoFlowStepsToJson(OnfidoFlowSteps instance) {
   return val;
 }
 
-CaptureDocumentStep _$CaptureDocumentStepFromJson(Map<String, dynamic> json) {
-  return CaptureDocumentStep(
+OnfidoCaptureDocumentStep _$OnfidoCaptureDocumentStepFromJson(
+    Map<String, dynamic> json) {
+  return OnfidoCaptureDocumentStep(
     docType: _$enumDecodeNullable(_$OnfidoDocumentTypeEnumMap, json['docType']),
     countryCode:
         _$enumDecodeNullable(_$OnfidoCountryCodeEnumMap, json['countryCode']),
   );
 }
 
-Map<String, dynamic> _$CaptureDocumentStepToJson(
-        CaptureDocumentStep instance) =>
+Map<String, dynamic> _$OnfidoCaptureDocumentStepToJson(
+        OnfidoCaptureDocumentStep instance) =>
     <String, dynamic>{
       'docType': _$OnfidoDocumentTypeEnumMap[instance.docType],
       'countryCode': _$OnfidoCountryCodeEnumMap[instance.countryCode],
@@ -385,8 +386,8 @@ const _$OnfidoCaptureTypeEnumMap = {
   OnfidoCaptureType.VIDEO: 'VIDEO',
 };
 
-OnfidoAppearance _$OnfidoAppearanceFromJson(Map<String, dynamic> json) {
-  return OnfidoAppearance(
+OnfidoIOSAppearance _$OnfidoIOSAppearanceFromJson(Map<String, dynamic> json) {
+  return OnfidoIOSAppearance(
     onfidoPrimaryButtonTextColor:
         json['onfidoPrimaryButtonTextColor'] as String,
     onfidoPrimaryButtonColorPressed:
@@ -396,7 +397,7 @@ OnfidoAppearance _$OnfidoAppearanceFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$OnfidoAppearanceToJson(OnfidoAppearance instance) {
+Map<String, dynamic> _$OnfidoIOSAppearanceToJson(OnfidoIOSAppearance instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

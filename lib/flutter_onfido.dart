@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_onfido/onfido_config.dart';
 
@@ -9,7 +10,10 @@ export './enums.dart';
 class FlutterOnfido {
   static const MethodChannel _channel = const MethodChannel('flutter_onfido');
 
-  static Future<OnfidoResult> start(OnfidoConfig config, OnfidoAppearance appearance) async {
+  static Future<OnfidoResult> start({
+    @required OnfidoConfig config,
+    OnfidoIOSAppearance iosAppearance = const OnfidoIOSAppearance(),
+  }) async {
     final error = _validateConfig(config);
     if (error != null) {
       throw OnfidoConfigValidationException(error);
@@ -17,7 +21,7 @@ class FlutterOnfido {
     final confingJson = config.toJson();
     final result = await _channel.invokeMethod('start', {
       "config": confingJson,
-      "appearance": appearance.toJson(),
+      "appearance": iosAppearance.toJson(),
     });
     return OnfidoResult.fromJson(result);
   }

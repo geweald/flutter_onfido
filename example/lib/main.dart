@@ -22,15 +22,15 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     try {
       var result = await FlutterOnfido.start(
-        OnfidoConfig(
+        config: OnfidoConfig(
           sdkToken: "",
           flowSteps: OnfidoFlowSteps(
-            welcome: false,
-            captureDocument:
-                CaptureDocumentStep(countryCode: OnfidoCountryCode.USA, docType: OnfidoDocumentType.GENERIC),
-          ),
+              welcome: false,
+              captureDocument:
+                  OnfidoCaptureDocumentStep(countryCode: OnfidoCountryCode.USA, docType: OnfidoDocumentType.GENERIC),
+              captureFace: OnfidoCaptureFaceStep(OnfidoCaptureType.PHOTO)),
         ),
-        OnfidoAppearance(),
+        iosAppearance: OnfidoIOSAppearance(),
       );
       print(result);
     } catch (e) {

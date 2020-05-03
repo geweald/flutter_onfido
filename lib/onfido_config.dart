@@ -22,7 +22,7 @@ class OnfidoConfig {
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class OnfidoFlowSteps {
   final bool welcome;
-  final CaptureDocumentStep captureDocument;
+  final OnfidoCaptureDocumentStep captureDocument;
   final OnfidoCaptureFaceStep captureFace;
 
   OnfidoFlowSteps({
@@ -36,17 +36,17 @@ class OnfidoFlowSteps {
 }
 
 @JsonSerializable()
-class CaptureDocumentStep {
+class OnfidoCaptureDocumentStep {
   final OnfidoDocumentType docType;
   final OnfidoCountryCode countryCode;
 
-  CaptureDocumentStep({
+  OnfidoCaptureDocumentStep({
     @required this.docType,
     @required this.countryCode,
   });
 
-  factory CaptureDocumentStep.fromJson(Map<String, dynamic> json) => _$CaptureDocumentStepFromJson(json);
-  Map<String, dynamic> toJson() => _$CaptureDocumentStepToJson(this);
+  factory OnfidoCaptureDocumentStep.fromJson(Map<String, dynamic> json) => _$OnfidoCaptureDocumentStepFromJson(json);
+  Map<String, dynamic> toJson() => _$OnfidoCaptureDocumentStepToJson(this);
 }
 
 @JsonSerializable()
@@ -60,21 +60,21 @@ class OnfidoCaptureFaceStep {
 }
 
 @JsonSerializable(includeIfNull: false)
-class OnfidoAppearance {
+class OnfidoIOSAppearance {
   final String onfidoPrimaryColor;
   final String onfidoPrimaryButtonTextColor;
   final String onfidoPrimaryButtonColorPressed;
   final bool onfidoIosSupportDarkMode;
 
-  OnfidoAppearance({
+  const OnfidoIOSAppearance({
     this.onfidoPrimaryButtonTextColor,
     this.onfidoPrimaryButtonColorPressed,
     this.onfidoIosSupportDarkMode = false,
     this.onfidoPrimaryColor,
   });
 
-  factory OnfidoAppearance.fromJson(Map<String, dynamic> json) => _$OnfidoAppearanceFromJson(json);
-  Map<String, dynamic> toJson() => _$OnfidoAppearanceToJson(this);
+  factory OnfidoIOSAppearance.fromJson(Map<String, dynamic> json) => _$OnfidoIOSAppearanceFromJson(json);
+  Map<String, dynamic> toJson() => _$OnfidoIOSAppearanceToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
