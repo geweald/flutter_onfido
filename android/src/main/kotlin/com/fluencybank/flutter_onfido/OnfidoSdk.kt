@@ -14,7 +14,6 @@ import io.flutter.plugin.common.MethodChannel
 class OnfidoSdk(var currentFlutterResult: MethodChannel.Result?, var activityListener: OnfidoSdkActivityEventListener, val client: Onfido, var currentActivity: Activity?) {
 
     private fun setFlutterResult(result: MethodChannel.Result?) {
-        currentFlutterResult?.error("error", "New activity was started before old promise was resolved.", null)
         currentFlutterResult = result
         activityListener.setCurrentFlutterResult(result)
     }
