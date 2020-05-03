@@ -38,14 +38,11 @@ class OnfidoSdkActivityEventListener(
                         faceId = captures.face!!.id
                         faceVarient = captures.face!!.variant.toString()
                     }
-                    val response = Response(docFrontId!!, docBackId!!, faceId!!, faceVarient!!)
-                    flutterResult = try {
-//                        val responseMap: WritableMap = ReactNativeBridgeUtiles.convertPublicFieldsToWritableMap(response)
-                        flutterResult!!.success("Test")
-                        null
+                    try {
+                        val response = Response(docFrontId, docBackId, faceId, faceVarient)
+                        flutterResult!!.success(Response.convertPublicFieldsToMap(response))
                     } catch (e: Exception) {
                         flutterResult!!.error("error", "Error serializing response", null)
-                        null
                     }
                 }
             }

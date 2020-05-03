@@ -67,8 +67,6 @@ class OnfidoSdk(var currentFlutterResult: MethodChannel.Result?, var activityLis
     @Throws(Exception::class)
     fun getFlowStepsFromConfig(config: HashMap<String, Any?>): Array<FlowStep> {
         try {
-
-
             val flowSteps = config.get("flowSteps") as HashMap<String, Any?>
 
             val welcomePageIsIncluded: Boolean
@@ -81,9 +79,6 @@ class OnfidoSdk(var currentFlutterResult: MethodChannel.Result?, var activityLis
             var captureDocument: HashMap<String, Any?>? = null
             var captureDocumentBoolean: Boolean? = null
 
-            // HashMap does not have a way to get multi-typed values without throwing exceptions.
-
-            // HashMap does not have a way to get multi-typed values without throwing exceptions.
             try {
                 captureDocumentBoolean = flowSteps.get("captureDocument") as Boolean
             } catch (e: Exception) {
@@ -114,8 +109,8 @@ class OnfidoSdk(var currentFlutterResult: MethodChannel.Result?, var activityLis
                 if (docTypeExists && countryCodeExists) {
                     val docTypeString: String = captureDocument.get("docType") as String
                     val docTypeEnum: DocumentType
-                    docTypeEnum = try {
-                        DocumentType.valueOf(docTypeString)
+                    try {
+                        docTypeEnum = DocumentType.valueOf(docTypeString)
                     } catch (iae: IllegalArgumentException) {
                         System.err.println("Unexpected docType value: [$docTypeString]")
                         throw Exception("Unexpected docType value.")
@@ -165,7 +160,6 @@ class OnfidoSdk(var currentFlutterResult: MethodChannel.Result?, var activityLis
 
     fun findCountryCodeByAlpha3(countryCodeString: String): CountryCode? {
         var countryCode: CountryCode? = null
-        // We'll use a loop to find the value, because streams are not supported in Java 7.
         for (cc in CountryCode.values()) {
             if (cc.alpha3 == countryCodeString) {
                 countryCode = cc

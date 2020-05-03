@@ -1,12 +1,16 @@
 package com.fluencybank.flutter_onfido
 
-public class Response(frontId: String, backId: String, faceId: String, faceVariant: String) {
+import java.lang.reflect.Field
 
-    open inner class Identifiable(id: String) {
+class Response(frontId: String?, backId: String?, faceId: String?, faceVariant: String?) {
+
+    open inner class Identifiable(id: String?) {
         var id = "default"
 
         init {
-            this.id = id
+            if (id != null) {
+                this.id = id
+            }
         }
     }
 
@@ -15,11 +19,13 @@ public class Response(frontId: String, backId: String, faceId: String, faceVaria
         lateinit var back: Identifiable
     }
 
-    inner class Face(id: String, variant: String) : Identifiable(id) {
-        var variant: String
+    inner class Face(id: String?, variant: String?) : Identifiable(id) {
+        lateinit var variant: String
 
         init {
-            this.variant = variant
+            if (variant != null) {
+                this.variant = variant
+            }
         }
     }
 
@@ -31,7 +37,7 @@ public class Response(frontId: String, backId: String, faceId: String, faceVaria
         initFace(faceId, faceVariant)
     }
 
-    private fun initDocument(frontId: String, backId: String) {
+    private fun initDocument(frontId: String?, backId: String?) {
         if (frontId != null || backId != null) {
             document = Document()
             if (frontId != null) {
@@ -43,9 +49,29 @@ public class Response(frontId: String, backId: String, faceId: String, faceVaria
         }
     }
 
-    private fun initFace(faceId: String, faceVariant: String) {
+    private fun initFace(faceId: String?, faceVariant: String?) {
         if (faceId != null || faceVariant != null) {
             face = Face(faceId, faceVariant)
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        fun convertPublicFieldsToMap(o: Any): HashMap<String, Any> {
+            val map: HashMap<String, Any> = HashMap();
+            val declaredFields: Array<Field> = o.javaClass.fields;
+            for (field in declaredFields) {
+                val key: String = field.getName()
+                val value: Any = field.get(o)
+                if (value is Iterable<*>) {
+                    // noop: This is currently not supported.
+                } else if (value is Boolean) {
+                    map.put(key, value)
+                } else {
+                    map.put(key, convertPublicFieldsToMap(value))
+                }
+            }
+            return map
         }
     }
 }

@@ -5,7 +5,7 @@ import 'enums.dart';
 
 part 'onfido_config.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class OnfidoConfig {
   final String sdkToken;
   final OnfidoFlowSteps flowSteps;
@@ -19,7 +19,7 @@ class OnfidoConfig {
   Map<String, dynamic> toJson() => _$OnfidoConfigToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class OnfidoFlowSteps {
   final bool welcome;
   final CaptureDocumentStep captureDocument;
@@ -59,7 +59,7 @@ class OnfidoCaptureFaceStep {
   Map<String, dynamic> toJson() => _$OnfidoCaptureFaceStepToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class OnfidoAppearance {
   final String onfidoPrimaryColor;
   final String onfidoPrimaryButtonTextColor;
@@ -77,7 +77,7 @@ class OnfidoAppearance {
   Map<String, dynamic> toJson() => _$OnfidoAppearanceToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class OnfidoResult {
   final OnfidoDocumentResult document;
   final OnfidoFaceResult face;
@@ -102,7 +102,7 @@ class OnfidoFaceResult {
   Map<String, dynamic> toJson() => _$OnfidoFaceResultToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class OnfidoDocumentResult {
   final OnfidoDocumentResultDetail front;
   final OnfidoDocumentResultDetail back;

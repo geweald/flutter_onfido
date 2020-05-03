@@ -15,11 +15,19 @@ OnfidoConfig _$OnfidoConfigFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$OnfidoConfigToJson(OnfidoConfig instance) =>
-    <String, dynamic>{
-      'sdkToken': instance.sdkToken,
-      'flowSteps': instance.flowSteps?.toJson(),
-    };
+Map<String, dynamic> _$OnfidoConfigToJson(OnfidoConfig instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('sdkToken', instance.sdkToken);
+  writeNotNull('flowSteps', instance.flowSteps?.toJson());
+  return val;
+}
 
 OnfidoFlowSteps _$OnfidoFlowStepsFromJson(Map<String, dynamic> json) {
   return OnfidoFlowSteps(
@@ -35,12 +43,20 @@ OnfidoFlowSteps _$OnfidoFlowStepsFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$OnfidoFlowStepsToJson(OnfidoFlowSteps instance) =>
-    <String, dynamic>{
-      'welcome': instance.welcome,
-      'captureDocument': instance.captureDocument?.toJson(),
-      'captureFace': instance.captureFace?.toJson(),
-    };
+Map<String, dynamic> _$OnfidoFlowStepsToJson(OnfidoFlowSteps instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('welcome', instance.welcome);
+  writeNotNull('captureDocument', instance.captureDocument?.toJson());
+  writeNotNull('captureFace', instance.captureFace?.toJson());
+  return val;
+}
 
 CaptureDocumentStep _$CaptureDocumentStepFromJson(Map<String, dynamic> json) {
   return CaptureDocumentStep(
@@ -380,14 +396,23 @@ OnfidoAppearance _$OnfidoAppearanceFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$OnfidoAppearanceToJson(OnfidoAppearance instance) =>
-    <String, dynamic>{
-      'onfidoPrimaryColor': instance.onfidoPrimaryColor,
-      'onfidoPrimaryButtonTextColor': instance.onfidoPrimaryButtonTextColor,
-      'onfidoPrimaryButtonColorPressed':
-          instance.onfidoPrimaryButtonColorPressed,
-      'onfidoIosSupportDarkMode': instance.onfidoIosSupportDarkMode,
-    };
+Map<String, dynamic> _$OnfidoAppearanceToJson(OnfidoAppearance instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('onfidoPrimaryColor', instance.onfidoPrimaryColor);
+  writeNotNull(
+      'onfidoPrimaryButtonTextColor', instance.onfidoPrimaryButtonTextColor);
+  writeNotNull('onfidoPrimaryButtonColorPressed',
+      instance.onfidoPrimaryButtonColorPressed);
+  writeNotNull('onfidoIosSupportDarkMode', instance.onfidoIosSupportDarkMode);
+  return val;
+}
 
 OnfidoResult _$OnfidoResultFromJson(Map<String, dynamic> json) {
   return OnfidoResult(
@@ -401,11 +426,19 @@ OnfidoResult _$OnfidoResultFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$OnfidoResultToJson(OnfidoResult instance) =>
-    <String, dynamic>{
-      'document': instance.document?.toJson(),
-      'face': instance.face?.toJson(),
-    };
+Map<String, dynamic> _$OnfidoResultToJson(OnfidoResult instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('document', instance.document?.toJson());
+  writeNotNull('face', instance.face?.toJson());
+  return val;
+}
 
 OnfidoFaceResult _$OnfidoFaceResultFromJson(Map<String, dynamic> json) {
   return OnfidoFaceResult(
@@ -434,11 +467,19 @@ OnfidoDocumentResult _$OnfidoDocumentResultFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$OnfidoDocumentResultToJson(
-        OnfidoDocumentResult instance) =>
-    <String, dynamic>{
-      'front': instance.front?.toJson(),
-      'back': instance.back?.toJson(),
-    };
+    OnfidoDocumentResult instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('front', instance.front?.toJson());
+  writeNotNull('back', instance.back?.toJson());
+  return val;
+}
 
 OnfidoDocumentResultDetail _$OnfidoDocumentResultDetailFromJson(
     Map<String, dynamic> json) {

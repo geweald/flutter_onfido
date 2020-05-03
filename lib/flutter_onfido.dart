@@ -3,17 +3,20 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_onfido/onfido_config.dart';
 
+export './onfido_config.dart';
+export './enums.dart';
+
 class FlutterOnfido {
   static const MethodChannel _channel = const MethodChannel('flutter_onfido');
 
   static Future<OnfidoResult> start(OnfidoConfig config, OnfidoAppearance appearance) async {
     final error = _validateConfig(config);
     if (error != null) {
-      throw Exception(error);
+      throw OnfidoConfigValidationException(error);
     }
-
+    final confingJson = config.toJson();
     final result = await _channel.invokeMethod('start', {
-      "config": config.toJson(),
+      "config": confingJson,
       "appearance": appearance.toJson(),
     });
     return OnfidoResult.fromJson(result);
@@ -37,4 +40,9 @@ class FlutterOnfido {
     }
     return null;
   }
+}
+
+class OnfidoConfigValidationException implements Exception {
+  final String message;
+  OnfidoConfigValidationException(this.message);
 }
