@@ -24,7 +24,7 @@ Update your iOS configuration files
 
 Change `ios/Podfile` to use version 10:
 
-```
+```ruby
 platform :ios, '10.0'
 ```
 
@@ -51,7 +51,7 @@ Add descriptions for camera and microphone permissions to `ios/YourProjectName/I
         sdkToken: "SDK_TOKEN_JWT",
         flowSteps: OnfidoFlowSteps(
             welcome: false,
-            captureDocument: CaptureDocumentStep(countryCode: OnfidoCountryCode.USA, docType: OnfidoDocumentType.GENERIC),
+            captureDocument: OnfidoCaptureDocumentStep(countryCode: OnfidoCountryCode.USA, docType: OnfidoDocumentType.GENERIC),
             captureFace: OnfidoCaptureFaceStep(OnfidoCaptureType.PHOTO),
         ),
     ),
@@ -59,7 +59,7 @@ Add descriptions for camera and microphone permissions to `ios/YourProjectName/I
 );
 ```
 
-**Parameters details**
+**Parameters details**:
 
 - **`sdkToken`**: Required. This is the JWT sdk token obtained by making a call to the SDK token API.
 - **`flowSteps`**: Required. This object is used to toggle individual screens on and off and set configurations inside the screens.
