@@ -1,12 +1,11 @@
 package com.fluencybank.flutter_onfido
 
-import java.lang.Exception
 import java.lang.reflect.Field
 
 class Response(frontId: String?, backId: String?, faceId: String?, faceVariant: String?) {
 
     open inner class Identifiable(id: String?) {
-        var id = "default"
+        var id: String = "default"
 
         init {
             if (id != null) {
@@ -56,27 +55,20 @@ class Response(frontId: String?, backId: String?, faceId: String?, faceVariant: 
         }
     }
 
-    companion object {
-        @JvmStatic
-        fun convertPublicFieldsToMap(o: Any): HashMap<String, Any> {
-            val map: HashMap<String, Any> = HashMap();
-            val declaredFields: Array<Field> = o.javaClass.fields;
-            for (field in declaredFields) {
-                try {
-                    val key: String = field.getName()
-                    val value: Any? = field.get(o)
-                    if (value is Iterable<*>) {
-                        // noop: This is currently not supported.
-                    } else if (value is Boolean || value is String) {
-                        map.put(key, value)
-                    } else if (value != null) {
-                        map.put(key, convertPublicFieldsToMap(value))
-                    }
-                } catch (e: Exception) {
-                    continue
-                }
+    fun toMap(): HashMap<String, Any> {
+        val map: HashMap<String, Any> = HashMap()
+        if (document != null) {
+            map.put("document", HashMap<String, Any>())
+            if (document.front != null) {
+                (map["document"] as HashMap<String, Any>).put("front", hashMapOf("id" to document.front.id))
             }
-            return map
+            if (document.back != null) {
+                (map["document"] as HashMap<String, Any>).put("back", hashMapOf("id" to document.back.id))
+            }
         }
+        if (face != null) {
+            map.put("face", hashMapOf("variant" to face.variant, "id" to face.id))
+        }
+        return map
     }
 }

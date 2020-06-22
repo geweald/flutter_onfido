@@ -40,7 +40,7 @@ class OnfidoSdkActivityEventListener(
                     }
                     try {
                         val response = Response(docFrontId, docBackId, faceId, faceVarient)
-                        flutterResult!!.success(Response.convertPublicFieldsToMap(response))
+                        flutterResult!!.success(response.toMap())
                     } catch (e: Exception) {
                         flutterResult!!.error("error", "Error serializing response", null)
                     }
@@ -61,7 +61,7 @@ class OnfidoSdkActivityEventListener(
                 }
             }
         })
-        return true;
+        return true
     }
 
 }
