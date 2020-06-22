@@ -1,5 +1,6 @@
 package com.fluencybank.flutter_onfido
 
+import java.lang.Exception
 import java.lang.reflect.Field
 
 class Response(frontId: String?, backId: String?, faceId: String?, faceVariant: String?) {
@@ -61,14 +62,18 @@ class Response(frontId: String?, backId: String?, faceId: String?, faceVariant: 
             val map: HashMap<String, Any> = HashMap();
             val declaredFields: Array<Field> = o.javaClass.fields;
             for (field in declaredFields) {
-                val key: String = field.getName()
-                val value: Any = field.get(o)
-                if (value is Iterable<*>) {
-                    // noop: This is currently not supported.
-                } else if (value is Boolean) {
-                    map.put(key, value)
-                } else {
-                    map.put(key, convertPublicFieldsToMap(value))
+                try {
+                    val key: String = field.getName()
+                    val value: Any? = field.get(o)
+                    if (value is Iterable<*>) {
+                        // noop: This is currently not supported.
+                    } else if (value is Boolean || value is String) {
+                        map.put(key, value)
+                    } else if (value != null) {
+                        map.put(key, convertPublicFieldsToMap(value))
+                    }
+                } catch (e: Exception) {
+                    continue
                 }
             }
             return map
