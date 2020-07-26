@@ -3,6 +3,8 @@
 Onfido SDK flutter plugin.
 Inspired by Onfido [react-native-sdk](https://github.com/onfido/react-native-sdk)
 
+TODO: `localisation`
+
 ## Project adjustments
 
 ### Android
