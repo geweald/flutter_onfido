@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_onfido/flutter_onfido.dart';
 
 void main() => runApp(MyApp());
@@ -11,28 +11,23 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  Future<void> initPlatformState() async {
+  Future<void> init() async {
     try {
       var result = await FlutterOnfido.start(
         config: OnfidoConfig(
-          sdkToken: "",
+          sdkToken: "", // PROVIDE TOKEN YOU'VE GOT FROM YOUR BACKEND
           flowSteps: OnfidoFlowSteps(
               welcome: false,
               captureDocument:
                   OnfidoCaptureDocumentStep(countryCode: OnfidoCountryCode.USA, docType: OnfidoDocumentType.GENERIC),
               captureFace: OnfidoCaptureFaceStep(OnfidoCaptureType.PHOTO)),
         ),
-        iosAppearance: OnfidoIOSAppearance(),
+        iosAppearance: OnfidoIOSAppearance(
+          onfidoPrimaryColor: "#0043DF",
+        ),
       );
       print(result);
+      // ASK YOUR BACKEND IF USER HAS PASSED VERIFICATION
     } catch (e) {
       print(e);
     }
@@ -48,9 +43,8 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: <Widget>[
-              Text('Running on: $_platformVersion\n'),
               RaisedButton(
-                onPressed: initPlatformState,
+                onPressed: init,
               )
             ],
           ),

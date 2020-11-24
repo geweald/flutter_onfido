@@ -1,9 +1,7 @@
 # flutter_onfido
 
 Onfido SDK flutter plugin.
-Inspired by Onfido [react-native-sdk](https://github.com/onfido/react-native-sdk)
-
-TODO: `localisation`
+Inspired and based on Onfido [react-native-sdk](https://github.com/onfido/react-native-sdk)
 
 ## Project adjustments
 
@@ -99,6 +97,18 @@ For **Android** in order to enhance the user experience on the transition betwee
 - `onfidoPrimaryButtonColorPressed`: Defines the background color of the primary action buttons when pressed
 
 - `onfidoPrimaryButtonTextColor`: Defines the color of the text inside the primary action buttons
+
+## Contributions
+
+Inspired and based on Onfido [react-native-sdk](https://github.com/onfido/react-native-sdk). Java has been changed to kotlin which I don't know well so code may be improved. **I won't maintain this package very frequently, feel free to contribute!** Some action points:
+
+**TODO**:
+
+- [ ] - localization support
+- [ ] - better example project
+- [ ] - tests
+- [ ] - improve docs
+- [ ] - improve kotlin code
 
 ## Getting Started with Flutter plugins
 
