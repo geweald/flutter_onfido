@@ -18,8 +18,9 @@ class _MyAppState extends State<MyApp> {
           sdkToken: "", // PROVIDE TOKEN YOU'VE GOT FROM YOUR BACKEND
           flowSteps: OnfidoFlowSteps(
               welcome: false,
-              captureDocument:
-                  OnfidoCaptureDocumentStep(countryCode: OnfidoCountryCode.USA, docType: OnfidoDocumentType.GENERIC),
+              captureDocument: OnfidoCaptureDocumentStep(
+                  countryCode: OnfidoCountryCode.USA,
+                  docType: OnfidoDocumentType.GENERIC),
               captureFace: OnfidoCaptureFaceStep(OnfidoCaptureType.PHOTO)),
         ),
         iosAppearance: OnfidoIOSAppearance(

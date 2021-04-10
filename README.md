@@ -105,6 +105,7 @@ Inspired and based on Onfido [react-native-sdk](https://github.com/onfido/react-
 **TODO**:
 
 - [ ] - localization support
+- [ ] - add support for hide logo and cobranding enterprise features
 - [ ] - better example project
 - [ ] - tests
 - [ ] - improve docs

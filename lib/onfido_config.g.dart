@@ -8,7 +8,7 @@ part of 'onfido_config.dart';
 
 OnfidoConfig _$OnfidoConfigFromJson(Map<String, dynamic> json) {
   return OnfidoConfig(
-    sdkToken: json['sdkToken'] as String,
+    sdkToken: json['sdkToken'] as String?,
     flowSteps: json['flowSteps'] == null
         ? null
         : OnfidoFlowSteps.fromJson(json['flowSteps'] as Map<String, dynamic>),
@@ -31,7 +31,7 @@ Map<String, dynamic> _$OnfidoConfigToJson(OnfidoConfig instance) {
 
 OnfidoFlowSteps _$OnfidoFlowStepsFromJson(Map<String, dynamic> json) {
   return OnfidoFlowSteps(
-    welcome: json['welcome'] as bool,
+    welcome: json['welcome'] as bool?,
     captureDocument: json['captureDocument'] == null
         ? null
         : OnfidoCaptureDocumentStep.fromJson(
@@ -70,23 +70,21 @@ OnfidoCaptureDocumentStep _$OnfidoCaptureDocumentStepFromJson(
 Map<String, dynamic> _$OnfidoCaptureDocumentStepToJson(
         OnfidoCaptureDocumentStep instance) =>
     <String, dynamic>{
-      'docType': _$OnfidoDocumentTypeEnumMap[instance.docType],
-      'countryCode': _$OnfidoCountryCodeEnumMap[instance.countryCode],
+      'docType': _$OnfidoDocumentTypeEnumMap[instance.docType!],
+      'countryCode': _$OnfidoCountryCodeEnumMap[instance.countryCode!],
     };
 
-T _$enumDecode<T>(
+T? _$enumDecode<T>(
   Map<T, dynamic> enumValues,
   dynamic source, {
-  T unknownValue,
+  T? unknownValue,
 }) {
   if (source == null) {
     throw ArgumentError('A value must be provided. Supported values: '
         '${enumValues.values.join(', ')}');
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
+  final value = enumValues.entries.singleWhere((e) => e.value == source).key;
 
   if (value == null && unknownValue == null) {
     throw ArgumentError('`$source` is not one of the supported values: '
@@ -95,10 +93,10 @@ T _$enumDecode<T>(
   return value ?? unknownValue;
 }
 
-T _$enumDecodeNullable<T>(
+T? _$enumDecodeNullable<T>(
   Map<T, dynamic> enumValues,
   dynamic source, {
-  T unknownValue,
+  T? unknownValue,
 }) {
   if (source == null) {
     return null;
@@ -378,7 +376,7 @@ OnfidoCaptureFaceStep _$OnfidoCaptureFaceStepFromJson(
 Map<String, dynamic> _$OnfidoCaptureFaceStepToJson(
         OnfidoCaptureFaceStep instance) =>
     <String, dynamic>{
-      'type': _$OnfidoCaptureTypeEnumMap[instance.type],
+      'type': _$OnfidoCaptureTypeEnumMap[instance.type!],
     };
 
 const _$OnfidoCaptureTypeEnumMap = {
@@ -389,11 +387,11 @@ const _$OnfidoCaptureTypeEnumMap = {
 OnfidoIOSAppearance _$OnfidoIOSAppearanceFromJson(Map<String, dynamic> json) {
   return OnfidoIOSAppearance(
     onfidoPrimaryButtonTextColor:
-        json['onfidoPrimaryButtonTextColor'] as String,
+        json['onfidoPrimaryButtonTextColor'] as String?,
     onfidoPrimaryButtonColorPressed:
-        json['onfidoPrimaryButtonColorPressed'] as String,
-    onfidoIosSupportDarkMode: json['onfidoIosSupportDarkMode'] as bool,
-    onfidoPrimaryColor: json['onfidoPrimaryColor'] as String,
+        json['onfidoPrimaryButtonColorPressed'] as String?,
+    onfidoIosSupportDarkMode: json['onfidoIosSupportDarkMode'] as bool?,
+    onfidoPrimaryColor: json['onfidoPrimaryColor'] as String?,
   );
 }
 
@@ -443,7 +441,7 @@ Map<String, dynamic> _$OnfidoResultToJson(OnfidoResult instance) {
 
 OnfidoFaceResult _$OnfidoFaceResultFromJson(Map<String, dynamic> json) {
   return OnfidoFaceResult(
-    id: json['id'] as String,
+    id: json['id'] as String?,
     variant: _$enumDecodeNullable(_$OnfidoCaptureTypeEnumMap, json['variant']),
   );
 }
@@ -451,7 +449,7 @@ OnfidoFaceResult _$OnfidoFaceResultFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$OnfidoFaceResultToJson(OnfidoFaceResult instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'variant': _$OnfidoCaptureTypeEnumMap[instance.variant],
+      'variant': _$OnfidoCaptureTypeEnumMap[instance.variant!],
     };
 
 OnfidoDocumentResult _$OnfidoDocumentResultFromJson(Map<String, dynamic> json) {
@@ -485,7 +483,7 @@ Map<String, dynamic> _$OnfidoDocumentResultToJson(
 OnfidoDocumentResultDetail _$OnfidoDocumentResultDetailFromJson(
     Map<String, dynamic> json) {
   return OnfidoDocumentResultDetail(
-    json['id'] as String,
+    json['id'] as String?,
   );
 }
 
