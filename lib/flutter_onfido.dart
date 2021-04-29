@@ -30,9 +30,6 @@ class FlutterOnfido {
   }
 
   static String? _validateConfig(OnfidoConfig config) {
-    if (config == null) {
-      return "Config is missing";
-    }
     if (config.sdkToken == null || config.sdkToken!.isEmpty) {
       return "Sdk token is missing";
     }
