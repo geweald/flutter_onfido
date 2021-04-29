@@ -20,6 +20,7 @@ class FlutterOnfidoPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
   private lateinit var activityListener: OnfidoSdkActivityEventListener
   private lateinit var methodChannel: MethodChannel
   private lateinit var applicationContext: Context
+  private lateinit var pluginBinding: ActivityPluginBinding
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     onAttachedToEngine(flutterPluginBinding.applicationContext, flutterPluginBinding.binaryMessenger)
@@ -69,19 +70,20 @@ class FlutterOnfidoPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
   override fun onDetachedFromActivity() {
     onfidoSdk.setActivity(null)
+    pluginBinding.removeActivityResultListener(activityListener)
   }
 
   override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-    onfidoSdk.setActivity(binding.activity)
-    binding.addActivityResultListener(activityListener)
+    onReattachedToActivityForConfigChanges(binding)
   }
 
   override fun onAttachedToActivity(binding: ActivityPluginBinding) {
     onfidoSdk.setActivity(binding.activity)
-    binding.addActivityResultListener(activityListener)
+    pluginBinding = binding
+    pluginBinding.addActivityResultListener(activityListener)
   }
 
   override fun onDetachedFromActivityForConfigChanges() {
-    onfidoSdk.setActivity(null)
+    onDetachedFromActivityForConfigChanges()
   }
 }

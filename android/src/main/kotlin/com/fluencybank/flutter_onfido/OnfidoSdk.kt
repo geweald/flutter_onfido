@@ -34,13 +34,13 @@ class OnfidoSdk(var currentFlutterResult: MethodChannel.Result?, var activityLis
                 flowStepsWithOptions = getFlowStepsFromConfig(config)
             } catch (e: Exception) {
                 currentFlutterResult?.error("config_error", e.message, null)
-                currentFlutterResult = null
+                setFlutterResult(null)
                 return
             }
 
             if (currentActivity == null) {
                 currentFlutterResult?.error("error", "Android activity does not exist", null)
-                currentFlutterResult = null;
+                setFlutterResult(null);
                 return;
             }
 
@@ -52,13 +52,13 @@ class OnfidoSdk(var currentFlutterResult: MethodChannel.Result?, var activityLis
                 client.startActivityForResult(currentActivity!!, 1, onfidoConfig)
             } catch (e: Exception) {
                 currentFlutterResult?.error("error", "Failed to show Onfido page", null)
-                currentFlutterResult = null
+                setFlutterResult(null)
                 return
             }
         } catch (e: Exception) {
             e.printStackTrace()
             currentFlutterResult?.error("error", "Unexpected error starting Onfido page", null)
-            currentFlutterResult = null
+            setFlutterResult(null)
             return
         }
     }

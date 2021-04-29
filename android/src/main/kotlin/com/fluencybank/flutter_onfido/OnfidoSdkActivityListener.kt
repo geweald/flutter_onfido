@@ -43,6 +43,8 @@ class OnfidoSdkActivityEventListener(
                         flutterResult!!.success(response.toMap())
                     } catch (e: Exception) {
                         flutterResult!!.error("error", "Error serializing response", null)
+                    } finally {
+                        flutterResult = null
                     }
                 }
             }
