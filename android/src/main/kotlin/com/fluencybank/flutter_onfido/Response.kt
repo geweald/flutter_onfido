@@ -1,7 +1,5 @@
 package com.fluencybank.flutter_onfido
 
-import java.lang.reflect.Field
-
 class Response(frontId: String?, backId: String?, faceId: String?, faceVariant: String?) {
 
     open inner class Identifiable(id: String?) {
@@ -15,12 +13,12 @@ class Response(frontId: String?, backId: String?, faceId: String?, faceVariant: 
     }
 
     inner class Document {
-        lateinit var front: Identifiable
-        lateinit var back: Identifiable
+        var front: Identifiable? = null
+        var back: Identifiable? = null
     }
 
     inner class Face(id: String?, variant: String?) : Identifiable(id) {
-        lateinit var variant: String
+        var variant: String? = null
 
         init {
             if (variant != null) {
@@ -29,8 +27,8 @@ class Response(frontId: String?, backId: String?, faceId: String?, faceVariant: 
         }
     }
 
-    lateinit var document: Document
-    lateinit var face: Face
+    var document: Document? = null
+    var face: Face? = null
 
     init {
         initDocument(frontId, backId)
@@ -41,10 +39,10 @@ class Response(frontId: String?, backId: String?, faceId: String?, faceVariant: 
         if (frontId != null || backId != null) {
             document = Document()
             if (frontId != null) {
-                document.front = Identifiable(frontId)
+                document!!.front = Identifiable(frontId)
             }
             if (backId != null) {
-                document.back = Identifiable(backId)
+                document!!.back = Identifiable(backId)
             }
         }
     }
@@ -59,15 +57,15 @@ class Response(frontId: String?, backId: String?, faceId: String?, faceVariant: 
         val map: HashMap<String, Any> = HashMap()
         if (document != null) {
             map.put("document", HashMap<String, Any>())
-            if (document.front != null) {
-                (map["document"] as HashMap<String, Any>).put("front", hashMapOf("id" to document.front.id))
+            if (document!!.front != null) {
+                (map["document"] as HashMap<String, Any>)["front"] = hashMapOf("id" to document!!.front?.id)
             }
-            if (document.back != null) {
-                (map["document"] as HashMap<String, Any>).put("back", hashMapOf("id" to document.back.id))
+            if (document!!.back != null) {
+                (map["document"] as HashMap<String, Any>)["back"] = hashMapOf("id" to document!!.back?.id)
             }
         }
         if (face != null) {
-            map.put("face", hashMapOf("variant" to face.variant, "id" to face.id))
+            map.put("face", hashMapOf("variant" to face!!.variant, "id" to face!!.id))
         }
         return map
     }
