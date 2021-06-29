@@ -60,7 +60,7 @@ public func loadAppearanceFromConfig(config: NSDictionary) throws -> Appearance 
     }
 }
 
-public func buildOnfidoConfig(config:NSDictionary, appearance: Appearance) throws -> Onfido.OnfidoConfig.Builder {
+public func buildOnfidoConfig(config:NSDictionary, appearance: Appearance) throws -> Onfido.OnfidoConfigBuilder {
   let sdkToken:String = config["sdkToken"] as! String
   let flowSteps:NSDictionary? = config["flowSteps"] as? NSDictionary
   let captureDocument:NSDictionary? = flowSteps?["captureDocument"] as? NSDictionary

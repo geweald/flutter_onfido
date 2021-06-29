@@ -13,17 +13,21 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Future<void> init() async {
     try {
-      var result = await FlutterOnfido.start(
+      final exampleSdkToken =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
+      final result = await FlutterOnfido.start(
         config: OnfidoConfig(
           sdkToken:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c", // PROVIDE TOKEN YOU'VE GOT FROM YOUR BACKEND
+              // PROVIDE SDK TOKEN YOU'VE GOT FROM YOUR BACKEND
+              exampleSdkToken,
           flowSteps: OnfidoFlowSteps(
-              welcome: false,
-              captureDocument: OnfidoCaptureDocumentStep(
-                countryCode: OnfidoCountryCode.USA,
-                docType: OnfidoDocumentType.GENERIC,
-              ),
-              captureFace: OnfidoCaptureFaceStep(OnfidoCaptureType.PHOTO)),
+            welcome: true,
+            captureDocument: OnfidoCaptureDocumentStep(
+              countryCode: OnfidoCountryCode.USA,
+              docType: OnfidoDocumentType.GENERIC,
+            ),
+            captureFace: OnfidoCaptureFaceStep(OnfidoCaptureType.PHOTO),
+          ),
         ),
         iosAppearance: OnfidoIOSAppearance(
           onfidoPrimaryColor: "#0043DF",
@@ -48,6 +52,7 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               RaisedButton(
                 onPressed: init,
+                child: Text('start'),
               )
             ],
           ),
