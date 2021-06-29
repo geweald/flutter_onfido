@@ -15,12 +15,14 @@ class _MyAppState extends State<MyApp> {
     try {
       var result = await FlutterOnfido.start(
         config: OnfidoConfig(
-          sdkToken: "", // PROVIDE TOKEN YOU'VE GOT FROM YOUR BACKEND
+          sdkToken:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c", // PROVIDE TOKEN YOU'VE GOT FROM YOUR BACKEND
           flowSteps: OnfidoFlowSteps(
               welcome: false,
               captureDocument: OnfidoCaptureDocumentStep(
-                  countryCode: OnfidoCountryCode.USA,
-                  docType: OnfidoDocumentType.GENERIC),
+                countryCode: OnfidoCountryCode.USA,
+                docType: OnfidoDocumentType.GENERIC,
+              ),
               captureFace: OnfidoCaptureFaceStep(OnfidoCaptureType.PHOTO)),
         ),
         iosAppearance: OnfidoIOSAppearance(
