@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+- Android fix: `Failed to resolve maven-metadata.xml - Forbidden`
+
 ## 0.2.1
 
 - Fix android serialization and country code issue.
