@@ -68,11 +68,19 @@ OnfidoCaptureDocumentStep _$OnfidoCaptureDocumentStepFromJson(
 }
 
 Map<String, dynamic> _$OnfidoCaptureDocumentStepToJson(
-        OnfidoCaptureDocumentStep instance) =>
-    <String, dynamic>{
-      'docType': _$OnfidoDocumentTypeEnumMap[instance.docType!],
-      'countryCode': _$OnfidoCountryCodeEnumMap[instance.countryCode!],
-    };
+    OnfidoCaptureDocumentStep instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('docType', _$OnfidoDocumentTypeEnumMap[instance.docType]);
+  writeNotNull('countryCode', _$OnfidoCountryCodeEnumMap[instance.countryCode]);
+  return val;
+}
 
 T? _$enumDecode<T>(
   Map<T, dynamic> enumValues,
