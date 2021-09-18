@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.3
+
+- fix json serialize exception when `docType` and `countryCode` are not specified in `OnfidoCaptureDocumentStep`
+
+
 ## 0.2.2
 
 - Android fix: `Failed to resolve maven-metadata.xml - Forbidden`
