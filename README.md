@@ -5,7 +5,7 @@ Inspired and based on Onfido [react-native-sdk](https://github.com/onfido/react-
 
 Android SDK: `9.3.1`
 
-iOS SDK: `21.4`
+iOS SDK: `23.0`
 
 ## Project adjustments
 
