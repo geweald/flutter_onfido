@@ -9,21 +9,19 @@ func createResponse(_ results: [OnfidoResult], faceVariant: String?) -> [String:
     return false;
   });
 
-  let front: OnfidoResult? = document?.first
-  let back: OnfidoResult? = document?.last
+  let onfidoResult: OnfidoResult? = document?.first
 
   let face: OnfidoResult? = results.filter({ result in
     if case OnfidoResult.face = result { return true }
     return false
   }).first
 
-  if let documentUnwrappedFront = front, case OnfidoResult.document(let documentResponseFront) = documentUnwrappedFront {
-    jsonResponse["document"] = ["front": ["id": documentResponseFront.id]]
-    if let documentUnwrappedBack = back, case OnfidoResult.document(let documentResponseBack) = documentUnwrappedBack {
-      if (documentResponseBack.id != documentResponseFront.id) {
-        jsonResponse["document"]?["back"] = ["id": documentResponseBack.id]
+  if let documentUnwrapped = onfidoResult, case OnfidoResult.document(let documentResponse) = documentUnwrapped {
+      jsonResponse["document"] = ["front": ["id": documentResponse.front.id]]
+
+      if let back = documentResponse.back {
+          jsonResponse["document"]?["back"] = ["id": back.id]
       }
-    }
   }
 
   if let faceUnwrapped = face, case OnfidoResult.face(let faceResponse) = faceUnwrapped {

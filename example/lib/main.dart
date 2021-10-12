@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: <Widget>[
-              RaisedButton(
+              MaterialButton(
                 onPressed: init,
                 child: Text('start'),
               )
