@@ -1,13 +1,16 @@
 # Changelog
 
+## 0.2.4
+
+- Upgrade iOS SDK to 23.0 (thanks @fryette)
+
 ## 0.2.3
 
-- fix json serialize exception when `docType` and `countryCode` are not specified in `OnfidoCaptureDocumentStep`
-
+- fix json serialize exception when `docType` and `countryCode` are not specified in `OnfidoCaptureDocumentStep` (thanks @robinzhangx)
 
 ## 0.2.2
 
-- Android fix: `Failed to resolve maven-metadata.xml - Forbidden`
+- Android fix: `Failed to resolve maven-metadata.xml - Forbidden` (thanks @fryette)
 
 ## 0.2.1
 
