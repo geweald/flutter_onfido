@@ -8,10 +8,9 @@ part of 'onfido_config.dart';
 
 OnfidoConfig _$OnfidoConfigFromJson(Map<String, dynamic> json) {
   return OnfidoConfig(
-    sdkToken: json['sdkToken'] as String?,
-    flowSteps: json['flowSteps'] == null
-        ? null
-        : OnfidoFlowSteps.fromJson(json['flowSteps'] as Map<String, dynamic>),
+    sdkToken: json['sdkToken'] as String,
+    flowSteps:
+        OnfidoFlowSteps.fromJson(json['flowSteps'] as Map<String, dynamic>),
   );
 }
 
@@ -25,21 +24,19 @@ Map<String, dynamic> _$OnfidoConfigToJson(OnfidoConfig instance) {
   }
 
   writeNotNull('sdkToken', instance.sdkToken);
-  writeNotNull('flowSteps', instance.flowSteps?.toJson());
+  writeNotNull('flowSteps', instance.flowSteps.toJson());
   return val;
 }
 
 OnfidoFlowSteps _$OnfidoFlowStepsFromJson(Map<String, dynamic> json) {
   return OnfidoFlowSteps(
     welcome: json['welcome'] as bool?,
-    captureDocument: json['captureDocument'] == null
-        ? null
-        : OnfidoCaptureDocumentStep.fromJson(
-            json['captureDocument'] as Map<String, dynamic>),
-    captureFace: json['captureFace'] == null
-        ? null
-        : OnfidoCaptureFaceStep.fromJson(
-            json['captureFace'] as Map<String, dynamic>),
+    captureDocument: OnfidoCaptureDocumentStep.fromJson(
+      json['captureDocument'] as Map<String, dynamic>,
+    ),
+    captureFace: OnfidoCaptureFaceStep.fromJson(
+      json['captureFace'] as Map<String, dynamic>,
+    ),
   );
 }
 
@@ -53,8 +50,8 @@ Map<String, dynamic> _$OnfidoFlowStepsToJson(OnfidoFlowSteps instance) {
   }
 
   writeNotNull('welcome', instance.welcome);
-  writeNotNull('captureDocument', instance.captureDocument?.toJson());
-  writeNotNull('captureFace', instance.captureFace?.toJson());
+  writeNotNull('captureDocument', instance.captureDocument.toJson());
+  writeNotNull('captureFace', instance.captureFace.toJson());
   return val;
 }
 
