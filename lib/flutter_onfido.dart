@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_onfido/data/gateways/onfido_channel_gateway.dart';
 import 'package:flutter_onfido/onfido_config.dart';
 
 export './enums.dart';
@@ -16,11 +17,8 @@ class FlutterOnfido {
     required OnfidoConfig config,
     OnfidoIOSAppearance iosAppearance = const OnfidoIOSAppearance(),
   }) async {
-    final confingJson = config.toJson();
-    final result = await _channel.invokeMethod('start', {
-      "config": confingJson,
-      "appearance": iosAppearance.toJson(),
-    });
+    final onfidoChannel = AndroidOnfidoChannelGateway(channel: _channel);
+    final result = onfidoChannel.start(config);
     return OnfidoResult.fromJson(
       _jsonDecoder.convert(
         _jsonEncoder.convert(result),
