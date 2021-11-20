@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
 import 'package:flutter_onfido/flutter_onfido.dart';
 
@@ -15,8 +17,8 @@ class AndroidOnfidoChannelGateway implements OnfidoChannelGateway {
     final result = await channel.invokeMethod('start', {
       'config': config.toJson(),
     });
-
-    return result;
+    
+    return jsonDecode(jsonEncode(result));
   }
 }
 
@@ -35,6 +37,6 @@ class IOSChannelGateway implements OnfidoChannelGateway {
       "appearance": appearance.toJson(),
     });
 
-    return result;
+    return jsonDecode(jsonEncode(result));
   }
 }

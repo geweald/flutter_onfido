@@ -26,7 +26,6 @@ class OnfidoChannelServiceImpl implements OnfidoChannelService {
     OnfidoIOSAppearance appearance = const OnfidoIOSAppearance(),
   }) async {
     Map<String, dynamic> onfidoResult;
-
     if (isAndroid) {
       onfidoResult = await androidOnfidoGateway.start(config);
     } else {
