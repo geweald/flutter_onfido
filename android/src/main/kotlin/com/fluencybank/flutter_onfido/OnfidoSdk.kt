@@ -9,7 +9,7 @@ import com.onfido.android.sdk.capture.ui.options.CaptureScreenStep
 import com.onfido.android.sdk.capture.ui.options.FlowStep
 import com.onfido.android.sdk.capture.utils.CountryCode
 import io.flutter.plugin.common.MethodChannel
-
+import java.util.Locale
 
 class OnfidoSdk(var currentFlutterResult: MethodChannel.Result?, var activityListener: OnfidoSdkActivityEventListener, val client: Onfido, var currentActivity: Activity?) {
 
@@ -29,6 +29,8 @@ class OnfidoSdk(var currentFlutterResult: MethodChannel.Result?, var activityLis
         try {
             val sdkToken: String
             val flowStepsWithOptions: Array<FlowStep>
+            var locale: String? = null;
+
             try {
                 sdkToken = config.get("sdkToken").toString()
                 flowStepsWithOptions = getFlowStepsFromConfig(config)
@@ -44,11 +46,16 @@ class OnfidoSdk(var currentFlutterResult: MethodChannel.Result?, var activityLis
                 return;
             }
 
+            if (config.get("locale") != null)
+                locale = config.get("locale").toString();
+
             try {
-                val onfidoConfig = OnfidoConfig.builder(currentActivity!!)
-                        .withSDKToken(sdkToken)
-                        .withCustomFlow(flowStepsWithOptions)
-                        .build()
+                var onfidoConfigBuilder = OnfidoConfig.builder(currentActivity!!)
+                    .withSDKToken(sdkToken)
+                    .withCustomFlow(flowStepsWithOptions)
+                if(locale != null)
+                    onfidoConfigBuilder = onfidoConfigBuilder.withLocale(Locale(locale))
+                val onfidoConfig = onfidoConfigBuilder.build()
                 client.startActivityForResult(currentActivity!!, 1, onfidoConfig)
             } catch (e: Exception) {
                 currentFlutterResult?.error("error", "Failed to show Onfido page", null)

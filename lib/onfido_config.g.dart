@@ -12,6 +12,7 @@ OnfidoConfig _$OnfidoConfigFromJson(Map<String, dynamic> json) {
     flowSteps: json['flowSteps'] == null
         ? null
         : OnfidoFlowSteps.fromJson(json['flowSteps'] as Map<String, dynamic>),
+    locale: json['locale'] as String?,
   );
 }
 
@@ -26,6 +27,7 @@ Map<String, dynamic> _$OnfidoConfigToJson(OnfidoConfig instance) {
 
   writeNotNull('sdkToken', instance.sdkToken);
   writeNotNull('flowSteps', instance.flowSteps?.toJson());
+  writeNotNull('locale', instance.locale);
   return val;
 }
 

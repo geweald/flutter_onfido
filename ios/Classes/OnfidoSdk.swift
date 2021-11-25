@@ -65,11 +65,19 @@ public func buildOnfidoConfig(config:NSDictionary, appearance: Appearance) throw
   let flowSteps:NSDictionary? = config["flowSteps"] as? NSDictionary
   let captureDocument:NSDictionary? = flowSteps?["captureDocument"] as? NSDictionary
   let captureFace:NSDictionary? = flowSteps?["captureFace"] as? NSDictionary
+  let locale:String? = config["locale"] as? String
 
   var onfidoConfig = OnfidoConfig.builder()
     .withSDKToken(sdkToken)
     .withAppearance(appearance)
- 
+
+  if(locale != nil) {
+    let path = Bundle.main.path(forResource: locale, ofType: "lproj")
+    if (path != nil) {
+      let bundle = Bundle(path: path!)
+      onfidoConfig.withCustomLocalization(in: bundle!)
+    }
+  }
 
   if flowSteps?["welcome"] as? Bool == true {
     onfidoConfig = onfidoConfig.withWelcomeStep()
