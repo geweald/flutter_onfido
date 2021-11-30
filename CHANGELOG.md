@@ -1,7 +1,7 @@
 # Changelog
 
 ## 0.2.5
-- Improved Onfido configurations validations
+- Improved Onfido configurations validations (thanks @LeonardoRosaa)
 
 ## 0.2.4
 
