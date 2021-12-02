@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.6
+- Support custom localization
+
 ## 0.2.5
 - Improved Onfido configurations validations (thanks @LeonardoRosaa)
 
