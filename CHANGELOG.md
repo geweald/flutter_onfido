@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.5
+- Improved Onfido configurations validations (thanks @LeonardoRosaa)
+
 ## 0.2.4
 
 - Upgrade iOS SDK to 23.0 (thanks @fryette)
