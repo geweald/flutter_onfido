@@ -13,7 +13,7 @@ class AndroidOnfidoChannelGateway implements OnfidoChannelGateway {
   final MethodChannel channel;
 
   @override
-  Future<Object> start(OnfidoConfig config) async {
+  Future<Map<String, dynamic>> start(OnfidoConfig config) async {
     final result = await channel.invokeMethod('start', {
       'config': config.toJson(),
     });
@@ -22,13 +22,13 @@ class AndroidOnfidoChannelGateway implements OnfidoChannelGateway {
   }
 }
 
-class IOSChannelGateway implements OnfidoChannelGateway {
-  const IOSChannelGateway({required this.channel});
+class IOSOnfidoChannelGateway implements OnfidoChannelGateway {
+  const IOSOnfidoChannelGateway({required this.channel});
 
   final MethodChannel channel;
 
   @override
-  Future<Map> start(
+  Future<Map<String, dynamic>> start(
     OnfidoConfig config, {
     OnfidoIOSAppearance appearance = const OnfidoIOSAppearance(),
   }) async {
