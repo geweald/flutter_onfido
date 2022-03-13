@@ -57,6 +57,8 @@ void main() {
             if (channel.method == 'start') {
               return onfidoResultJson;
             }
+
+            return null;
           },
         );
       },
