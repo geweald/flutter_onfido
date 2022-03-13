@@ -30,14 +30,18 @@ class OnfidoConfig {
 
 class OnfidoFlowSteps {
   final bool? welcome;
-  final OnfidoCaptureDocumentStep captureDocument;
-  final OnfidoCaptureFaceStep captureFace;
+  final OnfidoCaptureDocumentStep? captureDocument;
+  final OnfidoCaptureFaceStep? captureFace;
 
   OnfidoFlowSteps({
     this.welcome,
-    required this.captureDocument,
-    required this.captureFace,
-  });
+    this.captureDocument,
+    this.captureFace,
+  }) {
+    if (captureDocument == null && captureFace == null) {
+      throw OnfidoConfigInvalidFlowStepsException();
+    }
+  }
 
   factory OnfidoFlowSteps.fromJson(Map<String, dynamic> json) =>
       _$OnfidoFlowStepsFromJson(json);
