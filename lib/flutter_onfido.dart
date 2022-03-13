@@ -1,30 +1,32 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_onfido/data/gateways/onfido_channel_gateway.dart';
+import 'package:flutter_onfido/domain/services/onfido_channel_services.dart';
 import 'package:flutter_onfido/onfido_config.dart';
 
 export './enums.dart';
 export './onfido_config.dart';
 
-class FlutterOnfido {
-  static const MethodChannel _channel = const MethodChannel('flutter_onfido');
-  static const JsonDecoder _jsonDecoder = const JsonDecoder();
-  static const JsonEncoder _jsonEncoder = const JsonEncoder();
+const channel = MethodChannel('flutter_onfido');
+const androidOnfidoGateway = AndroidOnfidoChannelGateway(channel: channel);
+const iosOnfidoGateway = IOSOnfidoChannelGateway(channel: channel);
+final onfidoChannelService = OnfidoChannelServiceImpl(
+  androidOnfidoGateway: androidOnfidoGateway,
+  iosOnfidoGateway: iosOnfidoGateway,
+  isAndroid: Platform.isAndroid,
+);
 
+class FlutterOnfido {
   static Future<OnfidoResult> start({
     required OnfidoConfig config,
     OnfidoIOSAppearance iosAppearance = const OnfidoIOSAppearance(),
   }) async {
-    final confingJson = config.toJson();
-    final result = await _channel.invokeMethod('start', {
-      "config": confingJson,
-      "appearance": iosAppearance.toJson(),
-    });
-    return OnfidoResult.fromJson(
-      _jsonDecoder.convert(
-        _jsonEncoder.convert(result),
-      ),
+    return await onfidoChannelService.start(
+      config,
+      appearance: iosAppearance
     );
   }
 }
